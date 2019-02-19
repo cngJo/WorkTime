@@ -24,9 +24,9 @@
                 <label for="input-date">Datum</label>
                 <input type="text" id="input-date" name="date" maxlength="8" minlength="8" placeholder="dd.mm.yy">
                 <label for="input-hours">Hours</label>
-                <input type="number" max="24" min="0" id="input-hours" name="hours" placeholder="hours">
+                <input type="number" max="24" min="0" id="input-hours" name="hours" value="0" placeholder="hours">
                 <label for="input-minutes">Minutes</label>
-                <input type="number" max="60" min="0" id="input-minutes" name="minutes" placeholder="minutes">
+                <input type="number" max="60" min="0" id="input-minutes" name="minutes" value="0" placeholder="minutes">
                 <input type="submit" class="button" value="Submit">
             </form>
         </div>

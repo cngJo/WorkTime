@@ -109,7 +109,7 @@ class WorkTimeController extends Controller
             $minutes = $this->removeSign($mins);
         } else {
             $minutes = $this->removeSign($mins);
-            while ($minutes > 60) {
+            while ($minutes >= 60) {
                 $hours++;
                 $minutes -= 60;
             }

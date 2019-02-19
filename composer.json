@@ -1,0 +1,20 @@
+{
+    "name": "johannes/work-time",
+    "description": "WorkTime is a simple Web-App in which you can track you working hours",
+    "type": "proect",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Johannes Przymusinski",
+            "email": "johannes@przymusinski.de"
+        }
+    ],
+    "require": {
+        "bcosca/fatfree": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}

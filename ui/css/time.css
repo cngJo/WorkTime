@@ -1,0 +1,41 @@
+.color-red {
+    color: red!important;
+}
+.color-green {
+    color: green!important;
+}
+
+.header {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+table {
+    margin-bottom:0;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+td {
+  padding: 0;
+    border-bottom: 1px solid grey;
+}
+
+.div-center{
+    margin-left: 50%!important;
+    transform: translateX(-50%)!important;
+}
+
+form, input {
+    margin-bottom: 0;
+    padding-top: 0;
+}
+
+.button-clear {
+    padding-bottom: 0!important;
+    padding-top: 0!important;
+}

@@ -22,7 +22,7 @@
 
             <form action="api/{{ @type }}" method="post">
                 <label for="input-date">Datum</label>
-                <input type="text" id="input-date" name="date" maxlength="8" minlength="8" placeholder="dd.mm.yy">
+                <input type="text" id="input-date" name="date" maxlength="10" minlength="10" placeholder="dd.mm.yyyy">
                 <label for="input-hours">Hours</label>
                 <input type="number" max="24" min="0" id="input-hours" name="hours" value="0" placeholder="hours">
                 <label for="input-minutes">Minutes</label>
@@ -34,4 +34,5 @@
 </div>
 
 </body>
+<script src="ui/js/edit.js"></script>
 </html>

@@ -35,8 +35,8 @@
             </ul>
 
             <div class="buttons">
-                <a href="get" class="button button-clear color-green div-center">Überstunden</a>
-                <a href="take" class="button button-clear color-red div-center">Abbauen</a>
+                <a href="get" class="button button-clear color-green div-center">{{ @main.overtime }}</a>
+                <a href="take" class="button button-clear color-red div-center">{{ @main.reduce_overtime }}</a>
             </div>
         </div>
     </div>

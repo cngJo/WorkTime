@@ -12,16 +12,16 @@
 <div class="content">
     <div class="row">
         <div class="column column-50 column-offset-25 div-center">
-            <h1>Uninstall WorkTime</h1>
+            <h1>{{ @uninstall.title }}</h1>
             <form action="uninstall" method="post">
-                <h2 class="color-red">You are about to uninstall WorkTime this has the following consequences:</h2>
+                <h2 class="color-red">{{ @uninstall.warning }}</h2>
                 <ul>
-                    <li>Your Database gets dropped (deleted) => All your data is deledted</li>
-                    <li>The Database Configuration gets deleted.</li>
-                    <li>The files of WorkTime get <span class="color-red"><b>NOT</b></span> deleted</li>
+                    <repeat group="{{ @uninstall.effects }}" value="{{ @effect }}">
+                    <li>{{ @effect }}</li>
+                    </repeat>
                 </ul>
-                <input type="checkbox" id="sure" name="sure" required/> I am sure, that I want to uninstall WorkTime and I understood, that my data can <b class="color-red">NOT</b> be restored
-                <input type="submit" value="Uninstall">
+                <input type="checkbox" id="sure" name="sure" required/><span>{{ @uninstall.checkbox }}</span>
+                <input type="submit" value="{{ @uninstall.submit }}">
             </form>
         </div>
     </div>

@@ -13,6 +13,7 @@ $f3 = \Base::instance();
 
 $f3->config('App/Config/config.cfg');
 $f3->config('App/Config/routes.cfg');
-$f3->config('App/Config/db.cfg');
+$f3->config('App/Config/installation.cfg');
+$f3->config("App/Config/languages/{$f3->get('LANG')}.cfg");
 
 $f3->run();

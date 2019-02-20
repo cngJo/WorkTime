@@ -14,26 +14,25 @@
         <div class="column column-50 div-center">
             <check if="{{ @type=='get' }}">
                 <true>
-                    <h1>Überstunden aufbauen</h1>
+                    <h1>{{ @build_up.title }}</h1>
                 </true>
                 <false>
-                    <h1>Überstunden abbauen</h1>
+                    <h1>{{ @reduce.title }}</h1>
                 </false>
             </check>
 
             <form action="api/{{ @type }}" method="post">
-                <label for="input-date">Datum</label>
+                <label for="input-date">{{ @edit.date }}</label>
                 <input type="text" id="input-date" name="date" maxlength="10" minlength="10" placeholder="dd.mm.yyyy">
-                <label for="input-hours">Hours</label>
+                <label for="input-hours">{{ @edit.hours }}</label>
                 <input type="number" max="24" min="0" id="input-hours" name="hours" value="0" placeholder="hours">
-                <label for="input-minutes">Minutes</label>
+                <label for="input-minutes">{{ @edit.minutes }}</label>
                 <input type="number" max="60" min="0" id="input-minutes" name="minutes" value="0" placeholder="minutes">
-                <input type="submit" class="button" value="Submit">
+                <input type="submit" class="button" value="{{ @edit.submit }}">
             </form>
         </div>
     </div>
 </div>
 
 </body>
-<script src="ui/js/edit.js"></script>
 </html>

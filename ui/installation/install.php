@@ -11,15 +11,21 @@
 <div class="content">
     <div class="row">
         <div class="column column-50 column-offset-25 div-center">
-            <h1>Install WorkTime</h1>
+            <h1>{{ @installation.title }}</h1>
             <form action="install" method="post">
-                <label for="input-host">Database Host</label>
+                <label for="input-host">{{ @installation.form.db_host.title }}</label>
                 <input type="text" id="input-host" name="host" value="" />
-                <label for="input-user">Database Username</label>
+                <label for="input-user">{{ @installation.form.db_user.title }}</label>
                 <input type="text" id="input-user" name="user" value="" />
-                <label for="input-pass">Database Password</label>
+                <label for="input-pass">{{ @installation.form.db_pass.title }}</label>
                 <input type="text" id="input-pass" name="pass" value="" />
-                <input type="submit" value="Install">
+                <label for="input-lang">{{ @installation.form.lang.title }}</label>
+                <select name="lang" id="input-lang">
+                    <repeat group="{{ @languages }}" value="{{ @lang }}">
+                        <option value="{{ @lang }}">{{ @lang }}</option>
+                    </repeat>
+                </select>
+                <input type="submit" value="{{ @installation.form.submit }}">
             </form>
         </div>
     </div>

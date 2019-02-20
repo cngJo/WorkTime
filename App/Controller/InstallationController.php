@@ -25,7 +25,11 @@ class InstallationController
      */
     function showInstall()
     {
+        /** @var \Base $f3 */
+        $f3 = \Base::instance();
+
         if (!$this->isInstalled()) {
+//            $f3->set('languages', $f3->get('languages'));
             echo Template::instance()->render('installation/install.php');
         } else {
             // todo: change to template
@@ -63,8 +67,9 @@ class InstallationController
         $host = $f3->get('POST.host');
         $user = $f3->get('POST.user');
         $pass = $f3->get('POST.pass');
+        $lang = $f3->get('POST.lang');
 
-        $this->createDBConfig($host, $user, $pass);
+        $this->createSetupConfig($host, $user, $pass, $lang);
         $this->setupDatabase($host, $user, $pass);
 
         echo "Installation succeeded <a href='./'>Home</a>";
@@ -78,12 +83,12 @@ class InstallationController
      */
     function uninstall()
     {
-        unlink('App/Config/db.cfg');
+        unlink('App/Config/installation.cfg');
         $this->removeDatabase();
     }
 
     /**
-     * checks if WorkTime is installed, by checking if the db.cfg file exists
+     * checks if WorkTime is installed, by checking if the installation.cfg file exists
      *   - returns true if file exists (WorkTime is installed)
      *   - returns false if file does not exists (WorkTime is not installed)
      *
@@ -91,7 +96,7 @@ class InstallationController
      */
     private function isInstalled()
     {
-        return file_exists('App/Config/db.cfg');
+        return file_exists('App/Config/installation.cfg');
     }
 
     /**
@@ -101,14 +106,15 @@ class InstallationController
      * @param $user
      * @param $pass
      */
-    private function createDBConfig($host, $user, $pass)
+    private function createSetupConfig($host, $user, $pass, $lang)
     {
-        $cfg = fopen('App/Config/db.cfg', "w+");
+        $cfg = fopen('App/Config/installation.cfg', "w+");
         fwrite($cfg, "[globals]\n");
         fwrite($cfg, "DB_HOST={$host}\n");
         fwrite($cfg, "DB_NAME=worktimes\n");
         fwrite($cfg, "DB_USER={$user}\n");
         fwrite($cfg, "DB_PASS={$pass}\n");
+        fwrite($cfg, "LANG={$lang}\n");
         fclose($cfg);
     }
 

@@ -167,7 +167,7 @@ class WorkTimeController extends Controller
      */
     private function isInstalled()
     {
-        return file_exists('App/Config/db.cfg');
+        return file_exists('App/Config/installation.cfg');
     }
 
 }

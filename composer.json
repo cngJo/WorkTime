@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "bcosca/fatfree": "^3.6"
+        "bcosca/fatfree": "^3.6",
+        "ext-PDO": "^7.2"
     },
     "autoload": {
         "psr-4": {

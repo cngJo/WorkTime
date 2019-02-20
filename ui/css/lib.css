@@ -1,0 +1,12 @@
+.div-center {
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.color-red {
+    color: red !important;
+}
+
+.color-green {
+    color: green !important;
+}

@@ -20,41 +20,47 @@ class WorkTimeController extends Controller
     {
         $f3 = Base::instance();
 
-        $table = new Mapper(self::getDB(), 'times');
-        $data = $table->find();
+        if ($this->isInstalled()) {
 
-        $AllMinutes = 0;
+            $table = new Mapper(self::getDB(), 'times');
+            $data = $table->find();
 
-        $times = array();
+            $AllMinutes = 0;
 
-        foreach ($data as $time) {
+            $times = array();
 
-            // add or subtract the minutes from the database of AllMinutes according to the sign
-            if ($time->sign === '+') {
-                $AllMinutes += $time->minutes;
-            } else {
-                $AllMinutes -= $time->minutes;
+            foreach ($data as $time) {
+
+                // add or subtract the minutes from the database of AllMinutes according to the sign
+                if ($time->sign === '+') {
+                    $AllMinutes += $time->minutes;
+                } else {
+                    $AllMinutes -= $time->minutes;
+                }
+
+                $hours = $this->minutesToHours($time->minutes)['hours'];
+                $minutes = $this->minutesToHours($time->minutes)['minutes'];
+
+                array_push($times, [
+                    'sign' => $time->sign,
+                    'time' => "{$this->fixNumber($hours)}.{$this->fixNumber($minutes)}",
+                    'color' => $time->sign === '+' ? 'green' : 'red',
+                    'date' => $time->date
+                ]);
             }
 
-            $hours = $this->minutesToHours($time->minutes)['hours'];
-            $minutes = $this->minutesToHours($time->minutes)['minutes'];
-
-            array_push($times, [
-                'sign' => $time->sign,
-                'time' => "{$this->fixNumber($hours)}.{$this->fixNumber($minutes)}",
-                'color' => $time->sign === '+' ? 'green' : 'red',
-                'date' => $time->date
+            $f3->set('times', $times);
+            $f3->set('allTime', [
+                'time' => "{$this->fixNumber($this->minutesToHours($AllMinutes)['hours'])}.{$this->fixNumber($this->minutesToHours($AllMinutes)['minutes'])}",
+                'sign' => $AllMinutes < 0 ? '-' : '',
+                'color' => $AllMinutes < 0 ? 'red' : 'green'
             ]);
+
+            echo Template::instance()->render('layout.php');
+        } else {
+            echo "WorkTime ist not installed <a href='install'>Install WorkTime</a>";
         }
 
-        $f3->set('times', $times);
-        $f3->set('allTime', [
-            'time' => "{$this->fixNumber($this->minutesToHours($AllMinutes)['hours'])}.{$this->fixNumber($this->minutesToHours($AllMinutes)['minutes'])}",
-            'sign' => $AllMinutes < 0 ? '-' : '',
-            'color' => $AllMinutes < 0 ? 'red' : 'green'
-        ]);
-
-        echo Template::instance()->render('layout.php');
     }
 
     function get()
@@ -62,9 +68,13 @@ class WorkTimeController extends Controller
         /** @var \Base $f3 */
         $f3 = \Base::instance();
 
-        $f3->set('type', 'get');
+        if ($this->isInstalled()) {
+            $f3->set('type', 'get');
 
-        echo \Template::instance()->render('edit.php');
+            echo \Template::instance()->render('edit.php');
+        } else {
+            echo "WorkTime ist not installed";
+        }
 
     }
 
@@ -72,10 +82,13 @@ class WorkTimeController extends Controller
     {
         /** @var \Base $f3 */
         $f3 = \Base::instance();
+        if ($this->isInstalled()) {
+            $f3->set('type', 'take');
 
-        $f3->set('type', 'take');
-
-        echo \Template::instance()->render('edit.php');
+            echo \Template::instance()->render('edit.php');
+        } else {
+            echo "WorkTime ist not installed";
+        }
 
     }
 
@@ -100,7 +113,7 @@ class WorkTimeController extends Controller
         return implode($arr);
     }
 
-    function minutesToHours($mins)
+    private function minutesToHours($mins)
     {
         $hours = 0;
         $minutes = 0;
@@ -119,6 +132,11 @@ class WorkTimeController extends Controller
             'minutes' => $minutes,
             'hours' => $hours,
         ];
+    }
+
+    private function isInstalled()
+    {
+        return file_exists('App/Config/db.cfg');
     }
 
 }

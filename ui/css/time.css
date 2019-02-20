@@ -1,10 +1,3 @@
-.color-red {
-    color: red!important;
-}
-.color-green {
-    color: green!important;
-}
-
 .header {
     text-align: center;
 }
@@ -23,11 +16,6 @@ table {
 td {
   padding: 0;
     border-bottom: 1px solid grey;
-}
-
-.div-center{
-    margin-left: 50%!important;
-    transform: translateX(-50%)!important;
 }
 
 form, input {

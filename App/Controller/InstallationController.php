@@ -83,8 +83,12 @@ class InstallationController
      */
     function uninstall()
     {
+        /** @var \Base $f3 */
+        $f3 = \Base::instance();
+
         unlink('App/Config/installation.cfg');
         $this->removeDatabase();
+        $f3->reroute('/');
     }
 
     /**

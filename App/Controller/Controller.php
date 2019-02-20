@@ -17,6 +17,10 @@ class Controller
 
     protected $_db;
 
+    /**
+     * Constructor for the base Controller
+     *   - store an instance of DB\SQL in $this->_db, so we can access a DB instance in each controller
+     */
     public function __construct()
     {
         $f3 = Base::instance();
@@ -24,6 +28,10 @@ class Controller
         $this->_db = $db;
     }
 
+    /**
+     * Getter for $this->_db
+     * @return SQL
+     */
     public function getDB()
     {
         return $this->_db;

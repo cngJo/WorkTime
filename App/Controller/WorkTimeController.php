@@ -16,6 +16,12 @@ use Template;
 class WorkTimeController extends Controller
 {
 
+    /**
+     * This function gets called, when the user access the main route
+     *   - checks if WorkTime is installed
+     *   - gets all entries from the database and stores the values as an assoc array in $times
+     *   - calculates the amount of minutes from all entries and convert them in hh.mm, when time is negative we add an minus sign
+     */
     function index()
     {
         $f3 = Base::instance();
@@ -92,6 +98,14 @@ class WorkTimeController extends Controller
 
     }
 
+    /**
+     * Fixing numbers, so we always have two digits
+     *   - if one digit, add 0 in front of number
+     *   - if more than 2 digits, only return the first two digits
+     *
+     * @param $number
+     * @return string
+     */
     private function fixNumber($number)
     {
         if (strlen($number) == 1) {
@@ -104,6 +118,12 @@ class WorkTimeController extends Controller
         }
     }
 
+    /**
+     * Checks if the first char is either + or - and if, it removes them
+     *
+     * @param $number
+     * @return string
+     */
     private function removeSign($number)
     {
         $arr = str_split($number);
@@ -113,6 +133,13 @@ class WorkTimeController extends Controller
         return implode($arr);
     }
 
+    /**
+     * converts minutes in hours and minutes (150min = 2h30min)
+     *   - return as assoc array
+     *
+     * @param $mins
+     * @return array
+     */
     private function minutesToHours($mins)
     {
         $hours = 0;
@@ -134,6 +161,10 @@ class WorkTimeController extends Controller
         ];
     }
 
+    /**
+     * Checks if WorkTime is installed by checking if the db config files exists
+     * @return bool
+     */
     private function isInstalled()
     {
         return file_exists('App/Config/db.cfg');

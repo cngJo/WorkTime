@@ -20,7 +20,7 @@ Button on the home page.
 when you want to reduce overtime, you cen either go to ```/take``` or you use the ```reduce```
 Button on the home page.
 
-##Supported Languages
+## Supported Languages  
 At the moment only German and English (de_DE | en_US) are supported languages, you can add your own 
 translation, by adding the language code to the languages array in the ```App/Config/config.cfg``` file 
 and add a .cfg file with the corresponding language code as name to the ```App/Config/langauges``` folder.

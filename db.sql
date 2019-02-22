@@ -22,8 +22,9 @@ CREATE TABLE IF NOT EXISTS `times` (
   `sign` char(1) NOT NULL,
   `minutes` int(5) NOT NULL,
   `date` varchar(8) NOT NULL,
+  `notes` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

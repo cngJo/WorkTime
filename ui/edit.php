@@ -28,6 +28,8 @@
                 <input type="number" max="24" min="0" id="input-hours" name="hours" value="0" placeholder="hours">
                 <label for="input-minutes">{{ @edit.minutes }}</label>
                 <input type="number" max="60" min="0" id="input-minutes" name="minutes" value="0" placeholder="minutes">
+                <label for="input-notes">{{ @edit.notes }}</label>
+                <textarea name="notes" id="input-notes"></textarea>
                 <input type="submit" class="button" value="{{ @edit.submit }}">
             </form>
         </div>

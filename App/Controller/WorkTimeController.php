@@ -51,7 +51,8 @@ class WorkTimeController extends Controller
                     'sign' => $time->sign,
                     'time' => "{$this->fixNumber($hours)}.{$this->fixNumber($minutes)}",
                     'color' => $time->sign === '+' ? 'green' : 'red',
-                    'date' => $time->date
+                    'date' => $time->date,
+                    'note' => $time->notes
                 ]);
             }
 

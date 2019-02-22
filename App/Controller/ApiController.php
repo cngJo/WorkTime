@@ -23,6 +23,7 @@ class ApiController extends Controller
         $table->sign = '+';
         $table->minutes = ($f3->get('POST.hours') * 60) + $f3->get('POST.minutes');
         $table->date = $f3->get('POST.date');
+        $table->notes = $f3->get('POST.notes');
         $table->save();
 
         $f3->reroute('/');
@@ -37,6 +38,7 @@ class ApiController extends Controller
         $table->sign = '-';
         $table->minutes = ($f3->get('POST.hours') * 60) + $f3->get('POST.minutes');
         $table->date = $f3->get('POST.date');
+        $table->notes = $f3->get('POST.notes');
         $table->save();
 
         $f3->reroute('/');

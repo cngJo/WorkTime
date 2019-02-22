@@ -24,10 +24,14 @@
                 <repeat group="{{ @times }}" value="{{ @time }}">
                     <li class="color-{{ @times['color'] }}">
                         <table>
-                            <tr>
+                            <tr class="time-head">
                                 <td class="date">{{ @time['date'] }}</td>
                                 <td class="sign color-{{ @time['color'] }}">{{ @time['sign'] }}</td>
                                 <td class="time color-{{ @time['color'] }}">{{ @time['time'] }}</td>
+                            </tr>
+                            <tr class="note">
+                                <td rowspan="3">{{ @time['note'] }}</td>
+
                             </tr>
                         </table>
                     </li>
@@ -41,4 +45,5 @@
         </div>
     </div>
 </body>
+<script src="ui/js/notes.js"></script>
 </html>

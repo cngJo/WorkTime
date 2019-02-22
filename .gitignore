@@ -76,3 +76,4 @@ fabric.properties
 
 .idea/
 App/Config/installation.cfg
+tmp/

@@ -7,15 +7,22 @@ ul {
 }
 
 table {
-    margin-bottom:0;
+    margin-bottom: 0;
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 0;
 }
 
 td {
-  padding: 0;
+    padding: 0;
+}
+
+li {
     border-bottom: 1px solid grey;
+}
+
+.note {
+    display: none;
 }
 
 form, input {
@@ -24,6 +31,6 @@ form, input {
 }
 
 .button-clear {
-    padding-bottom: 0!important;
-    padding-top: 0!important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
 }

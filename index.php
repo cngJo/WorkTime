@@ -8,12 +8,4 @@
 
 require_once 'vendor/autoload.php';
 
-/** @var \Base $f3 */
-$f3 = \Base::instance();
-
-$f3->config('App/Config/config.cfg');
-$f3->config('App/Config/routes.cfg');
-$f3->config('App/Config/installation.cfg');
-$f3->config("App/Config/languages/{$f3->get('LANG')}.cfg");
-
-$f3->run();
+(new App\WorkTime())->run();

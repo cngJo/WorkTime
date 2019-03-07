@@ -175,8 +175,8 @@ class UserModel extends Mapper
      * @param $password
      * @return boolean
      */
-    private function checkPassword($username, $password)
+    public function checkPasswordFromUsername($username, $password)
     {
-        return password_verify($password, $this->findone(['username=?', $username])[0]->password);
+        return password_verify($password, $this->findone(['username=?', $username])->password);
     }
 }

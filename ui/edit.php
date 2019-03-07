@@ -22,6 +22,7 @@
             </check>
 
             <form action="api/{{ @type }}" method="post">
+                <input type="hidden" name="user_id" value="{{ @user_id }}">
                 <label for="input-date">{{ @edit.date }}</label>
                 <input type="text" id="input-date" name="date" maxlength="10" minlength="10" placeholder="dd.mm.yyyy">
                 <label for="input-hours">{{ @edit.hours }}</label>

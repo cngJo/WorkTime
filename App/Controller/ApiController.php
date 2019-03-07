@@ -24,6 +24,7 @@ class ApiController extends Controller
         $table->minutes = ($f3->get('POST.hours') * 60) + $f3->get('POST.minutes');
         $table->date = $f3->get('POST.date');
         $table->notes = $f3->get('POST.notes');
+        $table->user_id = $f3->get('POST.user_id');
         $table->save();
 
         $f3->reroute('/');
@@ -39,6 +40,7 @@ class ApiController extends Controller
         $table->minutes = ($f3->get('POST.hours') * 60) + $f3->get('POST.minutes');
         $table->date = $f3->get('POST.date');
         $table->notes = $f3->get('POST.notes');
+        $table->user_id = $f3->get('POST.user_id');
         $table->save();
 
         $f3->reroute('/');

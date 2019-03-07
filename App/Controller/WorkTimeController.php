@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Models\UserModel;
 use Base;
 use DB\SQL\Mapper;
 use Template;
@@ -28,42 +29,51 @@ class WorkTimeController extends Controller
 
         if ($this->isInstalled()) {
 
-            $table = new Mapper(self::getDB(), 'times');
-            $data = $table->find();
+            $userModel = new UserModel();
 
-            $AllMinutes = 0;
+            $loggedInUser = $userModel->isLoggedIn();
 
-            $times = array();
+            if (!$loggedInUser) {
+                die("you have to <a href='login'>login</a>");
+            } else {
 
-            foreach ($data as $time) {
+                $table = new Mapper(self::getDB(), 'times');
+                $data = $table->find(['user_id=?', $loggedInUser]);
 
-                // add or subtract the minutes from the database of AllMinutes according to the sign
-                if ($time->sign === '+') {
-                    $AllMinutes += $time->minutes;
-                } else {
-                    $AllMinutes -= $time->minutes;
+                $AllMinutes = 0;
+
+                $times = array();
+
+                foreach ($data as $time) {
+
+                    // add or subtract the minutes from the database of AllMinutes according to the sign
+                    if ($time->sign === '+') {
+                        $AllMinutes += $time->minutes;
+                    } else {
+                        $AllMinutes -= $time->minutes;
+                    }
+
+                    $hours = $this->minutesToHours($time->minutes)['hours'];
+                    $minutes = $this->minutesToHours($time->minutes)['minutes'];
+
+                    array_push($times, [
+                        'sign' => $time->sign,
+                        'time' => "{$this->fixNumber($hours)}.{$this->fixNumber($minutes)}",
+                        'color' => $time->sign === '+' ? 'green' : 'red',
+                        'date' => $time->date,
+                        'note' => $time->notes
+                    ]);
                 }
 
-                $hours = $this->minutesToHours($time->minutes)['hours'];
-                $minutes = $this->minutesToHours($time->minutes)['minutes'];
-
-                array_push($times, [
-                    'sign' => $time->sign,
-                    'time' => "{$this->fixNumber($hours)}.{$this->fixNumber($minutes)}",
-                    'color' => $time->sign === '+' ? 'green' : 'red',
-                    'date' => $time->date,
-                    'note' => $time->notes
+                $f3->set('times', $times);
+                $f3->set('allTime', [
+                    'time' => "{$this->fixNumber($this->minutesToHours($AllMinutes)['hours'])}.{$this->fixNumber($this->minutesToHours($AllMinutes)['minutes'])}",
+                    'sign' => $AllMinutes < 0 ? '-' : '',
+                    'color' => $AllMinutes < 0 ? 'red' : 'green'
                 ]);
+
+                echo Template::instance()->render('layout.php');
             }
-
-            $f3->set('times', $times);
-            $f3->set('allTime', [
-                'time' => "{$this->fixNumber($this->minutesToHours($AllMinutes)['hours'])}.{$this->fixNumber($this->minutesToHours($AllMinutes)['minutes'])}",
-                'sign' => $AllMinutes < 0 ? '-' : '',
-                'color' => $AllMinutes < 0 ? 'red' : 'green'
-            ]);
-
-            echo Template::instance()->render('layout.php');
         } else {
             echo "WorkTime ist not installed <a href='install'>Install WorkTime</a>";
         }
@@ -76,9 +86,19 @@ class WorkTimeController extends Controller
         $f3 = \Base::instance();
 
         if ($this->isInstalled()) {
-            $f3->set('type', 'get');
 
-            echo \Template::instance()->render('edit.php');
+            $userModel = new UserModel();
+
+            $loggedInUser = $userModel->isLoggedIn();
+
+            if (!$loggedInUser) {
+                die("you have to <a href='login'>login</a>");
+            } else {
+                $f3->set('type', 'get');
+                $f3->set('user_id', $loggedInUser);
+
+                echo \Template::instance()->render('edit.php');
+            }
         } else {
             echo "WorkTime ist not installed";
         }
@@ -90,9 +110,19 @@ class WorkTimeController extends Controller
         /** @var \Base $f3 */
         $f3 = \Base::instance();
         if ($this->isInstalled()) {
-            $f3->set('type', 'take');
 
-            echo \Template::instance()->render('edit.php');
+            $userModel = new UserModel();
+
+            $loggedInUser = $userModel->isLoggedIn();
+
+            if (!$loggedInUser) {
+                die("you have to <a href='login'>login</a>");
+            } else {
+                $f3->set('type', 'take');
+                $f3->set('user_id', $loggedInUser);
+
+                echo \Template::instance()->render('edit.php');
+            }
         } else {
             echo "WorkTime ist not installed";
         }

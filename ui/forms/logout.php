@@ -12,7 +12,7 @@
     <div class="row">
         <div class="column column-50 column-offset-25 div-center">
             <h1>{{ @logout.title }}</h1>
-            <form action="login" method="post">
+            <form action="logout" method="post">
                 <input type="checkbox" name="all"> {{ @logout.allDevices }} <br>
                 <input type="submit" value="{{ @logout.submit }}">
             </form>

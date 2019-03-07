@@ -37,4 +37,15 @@ class Controller
         return $this->_db;
     }
 
+    /**
+     * Overrides all Session variables
+     */
+    public function clearSessionVariables()
+    {
+        /** @var \Base $f3 */
+        $f3 = \Base::instance();
+
+        $f3->set('SESSION.error.message', '');
+    }
+
 }

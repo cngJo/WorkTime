@@ -9,6 +9,7 @@
 namespace App\Models;
 
 
+use App\WorkTime;
 use DB\SQL\Mapper;
 
 class UserModel extends Mapper
@@ -18,7 +19,11 @@ class UserModel extends Mapper
         /** @var \Base $f3 */
         $f3 = \Base::instance();
 
-        parent::__construct($f3->get('DB'), 'users');
+        if ($f3->get('DB')) {
+            parent::__construct($f3->get('DB'), 'users');
+        } else {
+            parent::__construct(WorkTime::getDB(), 'users');
+        }
     }
 
     /**

@@ -70,10 +70,20 @@ class InstallationController
         $pass = $f3->get('POST.pass');
         $lang = $f3->get('POST.lang');
 
+        $adminUserName = $f3->get('POST.admin-username');
+        $adminEMail = $f3->get('POST.admin-email');
+        $adminPassword = $f3->get('POST.admin-password');
+
         $this->createSetupConfig($host, $user, $pass, $lang);
         $this->setupDatabase($host, $user, $pass);
 
-        echo "Installation succeeded <a href='./'>Home</a>";
+        $adminUser = $this->createAdminUser($adminUserName,$adminPassword, $adminEMail);
+
+        if ($adminUser == true) {
+            echo "Installation succeeded <a href='./'>Home</a>";
+        } else {
+            echo $adminUser . " Press F5 to retry";
+        }
 
     }
 
@@ -154,16 +164,25 @@ class InstallationController
      * @param $username
      * @param $password
      * @param $email
+     * @return boolean
      */
-    private function ceateAdminUser($username, $password, $email)
+    private function createAdminUser($username, $password, $email)
     {
         /** @var \Base $f3 */
         $f3 = \Base::instance();
         $userModel = new UserModel();
 
-        if ($userModel->checkCredentials($username, $password, $email)) {
+        $credentials = $userModel->checkCredentials($username, $password, $email);
+
+        if ($credentials) {
             $userModel->username=$username;
-            $userModel->password = $userModel->hash
+            $userModel->password = $userModel->hashPassword($password);
+            $userModel->email = $email;
+            $userModel->role="admin";
+            $userModel->save();
+            return true;
+        } else {
+            return $credentials;
         }
     }
 

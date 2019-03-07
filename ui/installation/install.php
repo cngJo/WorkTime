@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="ui/css/install.css">
 </head>
 <body>
-
 <div class="content">
     <div class="row">
         <div class="column column-50 column-offset-25 div-center">

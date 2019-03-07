@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="ui/css/install.css">
 </head>
 <body>
-
 <div class="content">
     <div class="row">
         <div class="column column-50 column-offset-25 div-center">
@@ -25,6 +24,15 @@
                         <option value="<?= ($lang) ?>"><?= ($lang) ?></option>
                     <?php endforeach; ?>
                 </select>
+                <fieldset>
+                    <legend><?= ($installation['form']['adminuser']['heading']) ?></legend>
+                    <label for="input-admin-username"><?= ($installation['form']['adminuser']['username']['title']) ?></label>
+                    <input type="text" name="admin-username" id="input-admin-username">
+                    <label for="input-admin-email"><?= ($installation['form']['adminuser']['email']['title']) ?></label>
+                    <input type="email" name="admin-email" id="input-admin-email">
+                    <label for="input-admin-password"><?= ($installation['form']['adminuser']['password']['title']) ?></label>
+                    <input type="password" name="admin-password" id="input-admin-password">
+                </fieldset>
                 <input type="submit" value="<?= ($installation['form']['submit']) ?>">
             </form>
         </div>

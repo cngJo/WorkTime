@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Models\UserModel;
 use Base;
 use DB\SQL;
 use PDO;
@@ -145,6 +146,25 @@ class InstallationController
     {
         $pdo = new PDO("mysql:host={$host}", $user, $pass);
         $pdo->exec(file_get_contents('db.sql'));
+    }
+
+    /**
+     * This function creates an admin user with the given credentials in the database
+     *
+     * @param $username
+     * @param $password
+     * @param $email
+     */
+    private function ceateAdminUser($username, $password, $email)
+    {
+        /** @var \Base $f3 */
+        $f3 = \Base::instance();
+        $userModel = new UserModel();
+
+        if ($userModel->checkCredentials($username, $password, $email)) {
+            $userModel->username=$username;
+            $userModel->password = $userModel->hash
+        }
     }
 
 }

@@ -83,7 +83,7 @@ class UserModel extends Mapper
     public function checkCredentials($username, $password, $email)
     {
         if (!$this->usernameExists($username) && !$this->emailExists($email)) {
-            if (!$this->isEmailValid($email)) {
+            if ($this->isEmailValid($email)) {
                 if ($this->isUsernameValid($username)) {
                     if ($this->isPasswordValid($password)) {
                         return true;

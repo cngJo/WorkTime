@@ -34,6 +34,16 @@ class LoginTokenModel extends Mapper
     }
 
     /**
+     * Returns the user_id of the user, which generated the given token.
+     *
+     * @param $token
+     * @return mixed
+     */
+    public function getUserID($token) {
+        return $this->findone(['token=?', $token])->user_id;
+    }
+
+    /**
      * Removes the given token from the database
      *
      * @param $token

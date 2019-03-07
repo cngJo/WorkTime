@@ -50,7 +50,19 @@ class InstallationController
         if (!$this->isInstalled()) {
             echo "WorkTime ist not installed, goto /install to install WorkTime";
         } else {
-            echo Template::instance()->render('installation/uninstall.php');
+            $userModel = new UserModel();
+
+            $loggedInUser = $userModel->isLoggedIn();
+
+            if (!$loggedInUser) {
+                die("you have to <a href='login'>login</a>");
+            } else {
+                if (!$userModel->isAdmin($loggedInUser)) {
+                    die("you have to be administrator to be able to uninstall WorkTime");
+                } else {
+                    echo Template::instance()->render('installation/uninstall.php');
+                }
+            }
         }
     }
 

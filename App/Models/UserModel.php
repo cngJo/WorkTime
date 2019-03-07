@@ -179,4 +179,15 @@ class UserModel extends Mapper
     {
         return password_verify($password, $this->findone(['username=?', $username])->password);
     }
+
+    /**
+     * Checks, if the user with the given ID is administrator (attribute "role" in database is set to "admin")
+     *
+     * @param $user_id
+     * @return boolean
+     */
+    public function isAdmin($user_id)
+    {
+        return $this->findone(['id=?', $user_id])->role == "admin";
+    }
 }

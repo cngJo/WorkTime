@@ -34,3 +34,22 @@ form, input {
     padding-bottom: 0 !important;
     padding-top: 0 !important;
 }
+
+header {
+    width: 100%;
+    height: 50px;
+}
+
+#user-button {
+    float: right;
+}
+
+#user-button > button {
+    background-color: #e6e6e6 !important;
+    color: black;
+    border: 1px solid black;
+}
+
+#user-dropdown {
+    display: none;
+}

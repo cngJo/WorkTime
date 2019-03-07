@@ -10,3 +10,7 @@
 .color-green {
     color: green !important;
 }
+
+body {
+    margin: 0;
+}

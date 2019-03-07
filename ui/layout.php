@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<include href="utils/header.php" />
+
 <div id="application" class="container">
     <div class="row header">
         <div class="column column-50 column-offset-25">
@@ -46,4 +48,5 @@
     </div>
 </body>
 <script src="ui/js/notes.js"></script>
+<script src="ui/js/user-button.js"></script>
 </html>

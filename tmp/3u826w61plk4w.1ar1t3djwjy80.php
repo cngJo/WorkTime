@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<?php echo $this->render('utils/header.php',NULL,get_defined_vars(),0); ?>
+
 <div id="application" class="container">
     <div class="row header">
         <div class="column column-50 column-offset-25">
@@ -24,10 +26,14 @@
                 <?php foreach (($times?:[]) as $time): ?>
                     <li class="color-<?= ($times['color']) ?>">
                         <table>
-                            <tr>
+                            <tr class="time-head">
                                 <td class="date"><?= ($time['date']) ?></td>
                                 <td class="sign color-<?= ($time['color']) ?>"><?= ($time['sign']) ?></td>
                                 <td class="time color-<?= ($time['color']) ?>"><?= ($time['time']) ?></td>
+                            </tr>
+                            <tr class="note">
+                                <td rowspan="3"><?= ($time['note']) ?></td>
+
                             </tr>
                         </table>
                     </li>
@@ -41,4 +47,6 @@
         </div>
     </div>
 </body>
+<script src="ui/js/notes.js"></script>
+<script src="ui/js/user-button.js"></script>
 </html>

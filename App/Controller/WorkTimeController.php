@@ -71,6 +71,7 @@ class WorkTimeController extends Controller
                     'sign' => $AllMinutes < 0 ? '-' : '',
                     'color' => $AllMinutes < 0 ? 'red' : 'green'
                 ]);
+                $f3->set('user.name', $userModel->findone(array('id=?', $loggedInUser))->username);
 
                 echo Template::instance()->render('layout.php');
             }

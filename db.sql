@@ -34,7 +34,10 @@ CREATE TABLE IF NOT EXISTS `times` (
   `minutes` int(5) NOT NULL,
   `date` varchar(8) NOT NULL,
   `notes` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_times_users` (`user_id`),
+  CONSTRAINT `FK_times_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -46,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` text NOT NULL,
   `role` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -100,9 +100,11 @@ class UserController extends Controller
 
                 $error = false;
             } else {
+                $user_id = -1;
                 $error = true;
             }
         } else {
+            $user_id = -1;
             $error = true;
         }
 
@@ -110,6 +112,7 @@ class UserController extends Controller
             $f3->set('SESSION.error.message', 'Invalid login data');
             $f3->reroute('/login');
         } else {
+            $f3->set('SESSION.loggedin', $user_id);
             $f3->reroute('/');
         }
 
@@ -140,7 +143,7 @@ class UserController extends Controller
             setcookie('WorkTimeLoginToken', '', time() - 3600);
             setcookie('WorkTimeLoginToken_', '', time() - 3600);
         }
-
+        $f3->set('SESSION.loggedin', 'false');
         $f3->reroute('/');
     }
 }

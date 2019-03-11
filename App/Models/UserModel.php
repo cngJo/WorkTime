@@ -129,7 +129,7 @@ class UserModel extends Mapper
      * @param $username
      * @return bool
      */
-    private function isUsernameValid($username)
+    public function isUsernameValid($username)
     {
         return (strlen($username) >= 3 && strlen($username) <= 32) && (preg_match('/[a-zA-Z0-9_]+/', $username));
     }
@@ -140,7 +140,7 @@ class UserModel extends Mapper
      * @param $password
      * @return bool
      */
-    private function isPasswordValid($password)
+    public function isPasswordValid($password)
     {
         return strlen($password) >= 6 && strlen($password) <= 60;
     }
@@ -151,7 +151,7 @@ class UserModel extends Mapper
      * @param $email
      * @return mixed
      */
-    private function isEmailValid($email)
+    public function isEmailValid($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }

@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Models\UserModel;
+use App\Overtime;
 use Base;
 use DB\SQL\Mapper;
 use Template;
@@ -40,34 +41,15 @@ class WorkTimeController extends Controller
                 $table = new Mapper(self::getDB(), 'times');
                 $data = $table->find(['user_id=?', $loggedInUser]);
 
-                $AllMinutes = 0;
+                $overtime = Overtime::getOvertime($loggedInUser);
 
-                $times = array();
+                $AllMinutes = $overtime['allMinutes'];
+                $times = $overtime['times'];
 
-                foreach ($data as $time) {
-
-                    // add or subtract the minutes from the database of AllMinutes according to the sign
-                    if ($time->sign === '+') {
-                        $AllMinutes += $time->minutes;
-                    } else {
-                        $AllMinutes -= $time->minutes;
-                    }
-
-                    $hours = $this->minutesToHours($time->minutes)['hours'];
-                    $minutes = $this->minutesToHours($time->minutes)['minutes'];
-
-                    array_push($times, [
-                        'sign' => $time->sign,
-                        'time' => "{$this->fixNumber($hours)}.{$this->fixNumber($minutes)}",
-                        'color' => $time->sign === '+' ? 'green' : 'red',
-                        'date' => $time->date,
-                        'note' => $time->notes
-                    ]);
-                }
-
+                $time = Overtime::fixNumber(Overtime::minutesToHours($overtime['allMinutes'])['hours']) . '.' . Overtime::fixNumber(Overtime::minutesToHours($overtime['allMinutes'])['minutes']);
                 $f3->set('times', $times);
                 $f3->set('allTime', [
-                    'time' => "{$this->fixNumber($this->minutesToHours($AllMinutes)['hours'])}.{$this->fixNumber($this->minutesToHours($AllMinutes)['minutes'])}",
+                    'time' => $time,
                     'sign' => $AllMinutes < 0 ? '-' : '',
                     'color' => $AllMinutes < 0 ? 'red' : 'green'
                 ]);
@@ -128,69 +110,6 @@ class WorkTimeController extends Controller
             echo "WorkTime ist not installed";
         }
 
-    }
-
-    /**
-     * Fixing numbers, so we always have two digits
-     *   - if one digit, add 0 in front of number
-     *   - if more than 2 digits, only return the first two digits
-     *
-     * @param $number
-     * @return string
-     */
-    private function fixNumber($number)
-    {
-        if (strlen($number) == 1) {
-            return "0{$number}";
-        } else if (strlen($number) > 2) {
-            $numberArr = str_split($number);
-            return "{$numberArr[0]}{$numberArr[1]}";
-        } else {
-            return $number;
-        }
-    }
-
-    /**
-     * Checks if the first char is either + or - and if, it removes them
-     *
-     * @param $number
-     * @return string
-     */
-    private function removeSign($number)
-    {
-        $arr = str_split($number);
-        if ($arr[0] == '+' || $arr[0] == '-') {
-            array_shift($arr);
-        }
-        return implode($arr);
-    }
-
-    /**
-     * converts minutes in hours and minutes (150min = 2h30min)
-     *   - return as assoc array
-     *
-     * @param $mins
-     * @return array
-     */
-    private function minutesToHours($mins)
-    {
-        $hours = 0;
-        $minutes = 0;
-
-        if ($this->removeSign($mins) < 60) {
-            $minutes = $this->removeSign($mins);
-        } else {
-            $minutes = $this->removeSign($mins);
-            while ($minutes >= 60) {
-                $hours++;
-                $minutes -= 60;
-            }
-        }
-
-        return [
-            'minutes' => $minutes,
-            'hours' => $hours,
-        ];
     }
 
     /**

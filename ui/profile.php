@@ -20,13 +20,13 @@
     <div class="row">
         <div class="column column-50 column-offset-25">
             <label for="input-username">{{ @profile.profileInformation.username }}</label>
-            <input type="text" name="username" id="input-username" value="{{ @user.username }}">
+            <input type="text" name="username" id="input-username" value="{{ @loggedInUser.username }}">
         </div>
     </div>
     <div class="row">
         <div class="column column-50 column-offset-25">
             <label for="input-email">{{ @profile.profileInformation.email }}</label>
-            <input type="email" name="email" id="input-email" value="{{ @user.email }}">
+            <input type="email" name="email" id="input-email" value="{{ @loggedInUser.email }}">
         </div>
     </div>
     <div class="row">
@@ -38,7 +38,7 @@
     <div class="row">
         <div class="column column-50 column-offset-25">
             <label for="input-role">{{ @profile.profileInformation.role }}</label>
-            <input type="text" name="role" id="input-role" value="{{ @user.role }}" disabled>
+            <input type="text" name="role" id="input-role" value="{{ @loggedInUser.role }}" disabled>
         </div>
     </div>
     <div class="row">
@@ -54,12 +54,39 @@
     </div>
     <div class="row">
         <div class="column column-50 column-offset-25">
-            <h1 class="color-{{ @user.overtime['color'] }}">
-                <span class="sign">{{ @user.overtime['sign'] }}</span>
-                <span class="time">{{ @user.overtime['time'] }}</span>
+            <h1 class="color-{{ @loggedInUser.overtime['color'] }}">
+                <span class="sign">{{ @loggedInUser.overtime['sign'] }}</span>
+                <span class="time">{{ @loggedInUser.overtime['time'] }}</span>
             </h1>
         </div>
     </div>
+
+    <check if="{{ @loggedInUser.role === 'admin' }}">
+        <fieldset>
+            <legend>{{ @profile.otherUsers.header }}</legend>
+        <table>
+            <tr>
+                <th>{{ @profile.otherUsers.id }}</th>
+                <th>{{ @profile.otherUsers.username }}</th>
+                <th>{{ @profile.otherUsers.email }}</th>
+                <th>{{ @profile.otherUsers.role }}</th>
+                <th>{{ @profile.otherUsers.overtime }}</th>
+            </tr>
+            <repeat group="{{ @users }}" value="{{ @user }}">
+                <tr>
+                    <td>{{ @user.id }}</td>
+                    <td>{{ @user.username }}</td>
+                    <td>{{ @user.email }}</td>
+                    <td>{{ @user.role }}</td>
+                    <td class="color-{{ @user.overtime['color'] }}">
+                        <span class="sign">{{ @user.overtime['sign'] }}</span>
+                        <span class="time">{{ @user.overtime['time'] }}</span>
+                    </td>
+                </tr>
+            </repeat>
+        </table>
+        </fieldset>
+    </check>
 </div>
 
 </body>

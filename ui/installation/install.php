@@ -17,7 +17,7 @@
                 <label for="input-user">{{ @installation.form.db_user.title }}</label>
                 <input type="text" id="input-user" name="user" value="" />
                 <label for="input-pass">{{ @installation.form.db_pass.title }}</label>
-                <input type="text" id="input-pass" name="pass" value="" />
+                <input type="password" id="input-pass" name="pass" value="" />
                 <label for="input-lang">{{ @installation.form.lang.title }}</label>
                 <select name="lang" id="input-lang">
                     <repeat group="{{ @languages }}" value="{{ @lang }}">

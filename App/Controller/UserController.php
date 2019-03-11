@@ -146,4 +146,36 @@ class UserController extends Controller
         $f3->set('SESSION.loggedin', 'false');
         $f3->reroute('/');
     }
+
+    function changeUserData()
+    {
+        $f3 = \Base::instance();
+        $userModel = new UserModel();
+
+        $username = $f3->get('POST.username');
+        $email = $f3->get('POST.email');
+        $password = $f3->get('POST.password');
+        $password_hash = $userModel->hashPassword($password);
+
+
+        $user = $userModel->findone(['id=?', $userModel->isLoggedIn()]);
+
+        if (($user->username !== $username) && (!$userModel->usernameExists($username)) && ($userModel->isUsernameValid($username)))
+        {
+            $user->username = $username;
+        }
+
+        if (($user->email !== $email) && (!$userModel->emailExists($email)) && ($userModel->isEmailValid($email)))
+        {
+            $user->email = $email;
+        }
+
+        if (($user->password !== $password_hash) && ($userModel->isPasswordValid($password))) {
+            unset($password);
+            $user->password = $password_hash;
+        }
+
+        $user->save();
+        $f3->reroute('/profile');
+    }
 }

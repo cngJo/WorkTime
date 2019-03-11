@@ -167,7 +167,7 @@ class InstallationController
     private function setupDatabase($host, $user, $pass)
     {
         $pdo = new PDO("mysql:host={$host}", $user, $pass);
-        $pdo->exec(file_get_contents('db.sql'));
+        $pdo->exec(file_get_contents('db/db.sql'));
     }
 
     /**

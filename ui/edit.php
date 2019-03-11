@@ -37,5 +37,7 @@
     </div>
 </div>
 
+<include href="utils/footer.php" />
+
 </body>
 </html>

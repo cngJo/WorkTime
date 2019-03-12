@@ -22,4 +22,5 @@
 </div>
 
 </body>
+<include href="utils/scripts.php" />
 </html>

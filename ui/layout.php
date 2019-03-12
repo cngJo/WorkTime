@@ -1,15 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>WorkTimes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"/>
-    <link rel="stylesheet" href="ui/css/time.css">
-    <link rel="stylesheet" href="ui/css/lib.css">
+    <include href="utils/head.php"/>
 </head>
 <body>
 
-<include href="utils/header.php" />
+<include href="utils/header.php"/>
 
 <div id="application" class="container">
     <div class="row header">
@@ -47,7 +43,7 @@
         </div>
     </div>
 
-    <include href="utils/footer.php" />
+    <include href="utils/footer.php"/>
 </body>
 <script src="ui/js/notes.js"></script>
 <script src="ui/js/user-button.js"></script>

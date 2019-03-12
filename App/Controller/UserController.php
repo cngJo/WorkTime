@@ -12,21 +12,29 @@ namespace App\Controller;
 use App\Models\LoginTokenModel;
 use App\Models\UserModel;
 
+use Base;
+
 class UserController extends Controller
 {
 
     function login()
     {
+        $userModel = new UserModel();
+        Base::instance()->set('user.name', $userModel->findone(array('id=?', $userModel->isLoggedIn()))->username);
         echo \Template::instance()->render('forms/login.php');
     }
 
     function register()
     {
+        $userModel = new UserModel();
+        Base::instance()->set('user.name', $userModel->findone(array('id=?', $userModel->isLoggedIn()))->username);
         echo \Template::instance()->render('forms/register.php');
     }
 
     function logout()
     {
+        $userModel = new UserModel();
+        Base::instance()->set('user.name', $userModel->findone(array('id=?', $userModel->isLoggedIn()))->username);
         echo \Template::instance()->render('forms/logout.php');
     }
 

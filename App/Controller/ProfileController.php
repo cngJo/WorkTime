@@ -74,6 +74,7 @@ class ProfileController extends Controller
 
         $f3->set('users', $users);
         $f3->set('isAdmin', 'true');
+        $f3->set('user.name', $user->username);
         echo Template::instance()->render('profile.php');
     }
 
@@ -105,6 +106,7 @@ class ProfileController extends Controller
            ]
         ]);
         $f3->set('isAdmin', 'false');
+        $f3->set('user.name', $user->username);
         echo Template::instance()->render('profile.php');
     }
 

@@ -4,12 +4,12 @@
         <ul>
             <check if="{{ @SESSION.loggedin != 'false' }}">
                 <true>
-                    <li><a href="profile">{{ @user.profile }}</a></li>
-                    <li><a href="logout">{{ @user.logout }}</a></li>
+                    <li><a href="profile">{{ @header.profile }}</a></li>
+                    <li><a href="logout">{{ @header.logout }}</a></li>
                 </true>
                 <false>
-                    <li><a href="register">{{ @user.register }}</a></li>
-                    <li><a href="login">{{ @user.login }}</a></li>
+                    <li><a href="register">{{ @header.register }}</a></li>
+                    <li><a href="login">{{ @header.login }}</a></li>
                 </false>
             </check>
         </ul>

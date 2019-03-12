@@ -54,7 +54,7 @@ class WorkTimeController extends Controller
                     'color' => $AllMinutes < 0 ? 'red' : 'green'
                 ]);
                 $f3->set('user.name', $userModel->findone(array('id=?', $loggedInUser))->username);
-
+                $f3->set('user.isLoggedIn', 'true');
                 echo Template::instance()->render('layout.php');
             }
         } else {
@@ -79,7 +79,7 @@ class WorkTimeController extends Controller
             } else {
                 $f3->set('type', 'get');
                 $f3->set('user_id', $loggedInUser);
-
+                $f3->set('user.name', $userModel->findone(array('id=?', $loggedInUser))->username);
                 echo \Template::instance()->render('edit.php');
             }
         } else {
@@ -103,7 +103,7 @@ class WorkTimeController extends Controller
             } else {
                 $f3->set('type', 'take');
                 $f3->set('user_id', $loggedInUser);
-
+                $f3->set('user.name', $userModel->findone(array('id=?', $loggedInUser))->username);
                 echo \Template::instance()->render('edit.php');
             }
         } else {

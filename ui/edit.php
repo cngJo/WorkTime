@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<include href="utils/head.php" />
+    <include href="utils/head.php"/>
 </head>
 <body>
-
+<include href="utils/header.php"/>
 <div class="container">
     <div class="row">
         <div class="column column-50 div-center">
@@ -33,7 +33,8 @@
     </div>
 </div>
 
-<include href="utils/footer.php" />
+<include href="utils/footer.php"/>
 
 </body>
+<include href="utils/scripts.php" />
 </html>

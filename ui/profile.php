@@ -89,4 +89,5 @@
 <include href="utils/footer.php" />
 
 </body>
+<include href="utils/scripts.php" />
 </html>

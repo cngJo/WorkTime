@@ -45,6 +45,5 @@
 
     <include href="utils/footer.php"/>
 </body>
-<script src="ui/js/notes.js"></script>
-<script src="ui/js/user-button.js"></script>
+<include href="utils/scripts.php" />
 </html>

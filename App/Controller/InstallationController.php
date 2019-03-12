@@ -58,7 +58,9 @@ class InstallationController
                 die("you have to <a href='login'>login</a>");
             } else {
                 if (!$userModel->isAdmin($loggedInUser)) {
-                    die("you have to be administrator to be able to uninstall WorkTime");
+                    $userModel = new UserModel();
+                    Base::instance()->set('user.name', $userModel->findone(array('id=?', $userModel->isLoggedIn()))->username);
+                    echo Template::instance()->render('pages/noAdmin.php');
                 } else {
                     echo Template::instance()->render('installation/uninstall.php');
                 }

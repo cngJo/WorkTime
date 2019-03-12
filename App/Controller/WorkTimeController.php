@@ -35,7 +35,7 @@ class WorkTimeController extends Controller
             $loggedInUser = $userModel->isLoggedIn();
 
             if (!$loggedInUser) {
-                die("you have to <a href='login'>login</a>");
+                echo Template::instance()->render('pages/notLoggedIn.php');
             } else {
 
                 $table = new Mapper(self::getDB(), 'times');

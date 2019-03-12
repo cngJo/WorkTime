@@ -29,7 +29,7 @@ class ProfileController extends Controller
                 $this->userProfile();
             }
         } else {
-            die("You have to <a href='login'>Login</a> to see your profile");
+            echo Template::instance()->render('pages/notLoggedIn.php');
         }
     }
 

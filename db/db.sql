@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `times` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sign` char(1) NOT NULL,
   `minutes` int(5) NOT NULL,
-  `date` varchar(8) NOT NULL,
+  `date` varchar(10) NOT NULL,
   `notes` text NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),

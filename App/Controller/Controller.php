@@ -24,7 +24,7 @@ class Controller
     public function __construct()
     {
         $f3 = Base::instance();
-        $db = new SQL("mysql:host={$f3->get('DB_HOST')};dbname={$f3->get('DB_NAME')}", $f3->get('DB_USER'), $f3->get('DB_PAS'));
+        $db = new SQL("mysql:host={$f3->get('DB_HOST')};dbname={$f3->get('DB_NAME')}", $f3->get('DB_USER'), $f3->get('DB_PASS'));
         $this->_db = $db;
     }
 

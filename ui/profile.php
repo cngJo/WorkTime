@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <include href="utils/head.php" />
+    <include href="utils/head.php"/>
 </head>
 <body>
-<include href="utils/header.php" />
+<include href="utils/header.php"/>
 <div id="application" class="container">
     <div class="row">
         <div class="column column-50 column-offset-25">
@@ -57,37 +57,36 @@
             </h1>
         </div>
     </div>
-
     <check if="{{ @loggedInUser.role === 'admin' }}">
         <fieldset>
             <legend>{{ @profile.otherUsers.header }}</legend>
-        <table>
-            <tr>
-                <th>{{ @profile.otherUsers.id }}</th>
-                <th>{{ @profile.otherUsers.username }}</th>
-                <th>{{ @profile.otherUsers.email }}</th>
-                <th>{{ @profile.otherUsers.role }}</th>
-                <th>{{ @profile.otherUsers.overtime }}</th>
-            </tr>
-            <repeat group="{{ @users }}" value="{{ @user }}">
+            <table>
                 <tr>
-                    <td>{{ @user.id }}</td>
-                    <td>{{ @user.username }}</td>
-                    <td>{{ @user.email }}</td>
-                    <td>{{ @user.role }}</td>
-                    <td class="color-{{ @user.overtime['color'] }}">
-                        <span class="sign">{{ @user.overtime['sign'] }}</span>
-                        <span class="time">{{ @user.overtime['time'] }}</span>
-                    </td>
+                    <th>{{ @profile.otherUsers.id }}</th>
+                    <th>{{ @profile.otherUsers.username }}</th>
+                    <th>{{ @profile.otherUsers.email }}</th>
+                    <th>{{ @profile.otherUsers.role }}</th>
+                    <th>{{ @profile.otherUsers.overtime }}</th>
                 </tr>
-            </repeat>
-        </table>
+                <repeat group="{{ @users }}" value="{{ @user }}">
+                    <tr>
+                        <td>{{ @user.id }}</td>
+                        <td>{{ @user.username }}</td>
+                        <td>{{ @user.email }}</td>
+                        <td>{{ @user.role }}</td>
+                        <td class="color-{{ @user.overtime['color'] }}">
+                            <span class="sign">{{ @user.overtime['sign'] }}</span>
+                            <span class="time">{{ @user.overtime['time'] }}</span>
+                        </td>
+                    </tr>
+                </repeat>
+            </table>
         </fieldset>
     </check>
 </div>
 
-<include href="utils/footer.php" />
+<include href="utils/footer.php"/>
 
 </body>
-<include href="utils/scripts.php" />
+<include href="utils/scripts.php"/>
 </html>

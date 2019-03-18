@@ -39,15 +39,15 @@ class ProfileController extends Controller
         $userModel = new UserModel();
         $users = [];
 
-        $user = $userModel->isLoggedIn();
+        $LoggedInUser = $userModel->isLoggedIn();
 
-        $user = $userModel->findone(['id=?', $user]);
-        $overtime = Overtime::getOvertime($user->id);
+        $LoggedInUser = $userModel->findone(['id=?', $LoggedInUser]);
+        $overtime = Overtime::getOvertime($LoggedInUser->id);
         $time = Overtime::fixNumber(Overtime::minutesToHours($overtime['allMinutes'])['hours']) . '.' . Overtime::fixNumber(Overtime::minutesToHours($overtime['allMinutes'])['minutes']);
         $f3->set('loggedInUser', [
-            'username' => $user->username,
-            'email' => $user->email,
-            'role' => $user->role,
+            'username' => $LoggedInUser->username,
+            'email' => $LoggedInUser->email,
+            'role' => $LoggedInUser->role,
             'overtime' => [
                 'time' => $time,
                 'sign' => $overtime['allMinutes'] < 0 ? '-' : '',
@@ -74,7 +74,8 @@ class ProfileController extends Controller
 
         $f3->set('users', $users);
         $f3->set('isAdmin', 'true');
-        $f3->set('user.name', $user->username);
+        $f3->set('user.name', $LoggedInUser->username);
+        $f3->set('SESSION.user_id', $userModel->isLoggedIn());
         echo Template::instance()->render('profile.php');
     }
 

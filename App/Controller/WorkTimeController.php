@@ -112,13 +112,4 @@ class WorkTimeController extends Controller
 
     }
 
-    /**
-     * Checks if WorkTime is installed by checking if the db config files exists
-     * @return bool
-     */
-    private function isInstalled()
-    {
-        return file_exists('App/Config/installation.cfg');
-    }
-
 }

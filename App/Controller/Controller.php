@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Models\UserModel;
 use Base;
 use DB\SQL;
 
@@ -55,6 +56,16 @@ class Controller
     public function isInstalled()
     {
         return file_exists('App/Config/installation.cfg');
+    }
+
+    /**
+     * Checks if a user is logged in and is yeas, returns the id of the logged in user
+     *
+     * @return bool|mixed
+     */
+    public function getLoggedInUserID() {
+        $userModel = new UserModel();
+        return $userModel->isLoggedIn();
     }
 
 }

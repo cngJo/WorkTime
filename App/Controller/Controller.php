@@ -48,4 +48,13 @@ class Controller
         $f3->set('SESSION.error.message', '');
     }
 
+    /**
+     * Checks if WorkTime is installed by checking if the db config files exists
+     * @return bool
+     */
+    public function isInstalled()
+    {
+        return file_exists('App/Config/installation.cfg');
+    }
+
 }

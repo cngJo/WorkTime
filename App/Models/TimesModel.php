@@ -31,4 +31,8 @@ class TimesModel extends Mapper
 
         $this->save();
     }
+
+    public function getTimes($user_id) {
+        return $this->find(['user_id=?', $user_id]);
+    }
 }

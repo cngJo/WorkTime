@@ -47,6 +47,8 @@ class Controller
         $f3 = \Base::instance();
 
         $f3->set('SESSION.error.message', '');
+        $f3->set('SESSION.loggedin', false);
+        $f3->set('SESSION.loggedinUserId', -1);
     }
 
     /**

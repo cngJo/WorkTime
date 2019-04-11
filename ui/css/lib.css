@@ -22,3 +22,7 @@ input[disabled] {
 a {
     cursor: pointer;
 }
+
+.remove-entry {
+    cursor: pointer;
+}

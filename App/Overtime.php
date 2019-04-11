@@ -21,6 +21,8 @@ class Overtime
         $table = new Mapper($f3->get('DB'), 'times');
         $data = $table->find(['user_id=?', $user_id]);
 
+        $data = $f3->get('DB')->exec("select * from times where user_id={$user_id} and active=1 "); // select * from times where user_id = '' and active = 1
+
         $result = [
             'allMinutes' => 0,
             'times' => []
@@ -29,25 +31,26 @@ class Overtime
         foreach ($data as $time) {
 
             // add or subtract the minutes from the database of allMinutes according to the sign
-            if ($time->sign === '+') {
-                $result['allMinutes'] += $time->minutes;
+            if ($time['sign'] === '+') {
+                $result['allMinutes'] += $time['minutes'];
             } else {
-                $result['allMinutes'] -= $time->minutes;
+                $result['allMinutes'] -= $time['minutes'];
             }
 
-            $hours = self::minutesToHours($time->minutes)['hours'];
-            $minutes = self::minutesToHours($time->minutes)['minutes'];
+            $hours = self::minutesToHours($time['minutes'])['hours'];
+            $minutes = self::minutesToHours($time['minutes'])['minutes'];
 
             // fix numbers
             $hours = self::fixNumber($hours);
             $minutes = self::fixNumber($minutes);
 
             array_push($result['times'], [
-                'sign' => $time->sign,
+                'sign' => $time['sign'],
                 'time' => "{$hours}.{$minutes}",
-                'color' => $time->sign === '+' ? 'green' : 'red',
-                'date' => $time->date,
-                'note' => $time->notes
+                'color' => $time['sign'] === '+' ? 'green' : 'red',
+                'date' => $time['date'],
+                'note' => $time['notes'],
+                'id' => $time['id'],
             ]);
         }
 

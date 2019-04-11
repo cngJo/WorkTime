@@ -46,4 +46,15 @@ class ApiController extends Controller
         $f3->reroute('/');
     }
 
+    function remove($_, $params)
+    {
+        $f3 = \Base::instance();
+
+        $table = new Mapper(self::getDB(), 'times');
+        $table->load(['id=?', $params['id']]);
+        $table->active=0;
+        $table->save();
+
+        $f3->reroute('/');
+    }
 }

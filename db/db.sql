@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server Version:               10.1.35-MariaDB - mariadb.org binary distribution
--- Server Betriebssystem:        Win32
+-- Server Version:               10.1.38-MariaDB - mariadb.org binary distribution
+-- Server Betriebssystem:        Win64
 -- HeidiSQL Version:             10.1.0.5464
 -- --------------------------------------------------------
 
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `login_tokens` (
   PRIMARY KEY (`id`),
   KEY `FK_login_tokens_users` (`user_id`),
   CONSTRAINT `FK_login_tokens_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle worktimes.times
@@ -35,10 +35,11 @@ CREATE TABLE IF NOT EXISTS `times` (
   `date` varchar(10) NOT NULL,
   `notes` text NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
+  `active` int(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `FK_times_users` (`user_id`),
   CONSTRAINT `FK_times_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle worktimes.users
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` text NOT NULL,
   `role` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

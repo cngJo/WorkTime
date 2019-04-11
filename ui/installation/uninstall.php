@@ -1,11 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Install WorkTime</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"/>
-    <link rel="stylesheet" href="ui/css/install.css">
-    <link rel="stylesheet" href="ui/css/lib.css">
+    <include href="utils/head.php" />
 </head>
 <body>
 

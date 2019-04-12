@@ -70,7 +70,7 @@ class WorkTime
      * Checks if WorkTime is installed by checking if the db config files exists
      * @return bool
      */
-    public function isInstalled()
+    public static function isInstalled()
     {
         return file_exists('App/Config/installation.cfg');
     }

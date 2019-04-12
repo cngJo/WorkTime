@@ -57,7 +57,7 @@ class WorkTime
         $userModel = new UserModel();
         $user_id = $userModel->isLoggedIn();
 
-        if ($user_id !== false) {
+        if ($user_id !== false && $user_id !== null) {
             $f3->set('SESSION.loggedin', true);
             $f3->set('SESSION.loggedinUserId', $user_id);
         } else {
